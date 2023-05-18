@@ -7,6 +7,7 @@ import transformers
 from transformers import AutoTokenizer, AutoModelForMaskedLM, AutoModelForSequenceClassification
 import re
 import gdown
+import os
 
 # モデルファイルをダウンロード
 file_id = "1a2VIjUpt6sWIkntMZsmU3ewUXUl0-XgH"
@@ -14,6 +15,13 @@ url = f"https://drive.google.com/uc?id={file_id}"
 output = "trained_model"
 gdown.download(url, output, quiet=False)
 
+# ファイルの存在を確認
+file_exists = os.path.exists(output)
+if file_exists:
+    print("ファイルが存在します")
+else:
+    print("ファイルが存在しません")
+    
 # 施設・サービスに関する検索準備
 # FAQリストを読み込む
 faq_file = 'QA.csv'
