@@ -1,4 +1,3 @@
-# 必要なライブラリのインポート
 import streamlit as st
 import numpy as np
 import pandas as pd
@@ -9,11 +8,11 @@ from transformers import AutoTokenizer, AutoModelForMaskedLM, AutoModelForSequen
 import re
 import gdown
 
-# Google Driveの共有リンクからファイルIDを取得
-file_id = "https://drive.google.com/uc?id=1a2VIjUpt6sWIkntMZsmU3ewUXUl0-XgH"
-
 # モデルファイルをダウンロード
-gdown.download(f"https://drive.google.com/uc?id={file_id}", "trained_model")
+file_id = "1a2VIjUpt6sWIkntMZsmU3ewUXUl0-XgH"
+url = f"https://drive.google.com/uc?id={file_id}"
+output = "trained_model"
+gdown.download(url, output, quiet=False)
 
 # 施設・サービスに関する検索準備
 # FAQリストを読み込む
@@ -76,9 +75,8 @@ def reply_message_2(user_input_2):
     else:
         df2 = df1
 
-    # 保存したトークナイザーとモデルの読み込み
-    tokenizer2 = AutoTokenizer.from_pretrained("trained_model")
-    model2 = AutoModelForSequenceClassification.from_pretrained("trained_model")
+    tokenizer2 = AutoTokenizer.from_pretrained("./trained_model")
+    model2 = AutoModelForSequenceClassification.from_pretrained("./trained_model")
 
     # 質問をトークン化してエンコーディング
     encoded_input_2 = tokenizer2(user_input_2, padding=True, truncation=True, return_tensors="pt")
