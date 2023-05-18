@@ -1,0 +1,9 @@
+# 必要なライブラリのインポート
+streamlit
+numpy
+pandas
+csv
+torch
+transformers
+transformers
+re
