@@ -126,7 +126,7 @@ def page_item():
     
     reply_text_2 = reply_message_2(user_input_2)
     if st.button(label='検索'):
-        st.write(reply_text_2)selected
+        st.write(reply_text_2)
 
 # サイドバーの設定
 st.sidebar.header('接客支援アプリ')
