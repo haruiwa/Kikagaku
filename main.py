@@ -7,6 +7,10 @@ import torch
 import transformers
 from transformers import AutoTokenizer, AutoModelForMaskedLM, AutoModelForSequenceClassification
 import re
+import google.colab.drive as drive
+
+drive.mount('/content/drive')
+folder_path = '/content/drive/MyDrive/1a2VIjUpt6sWIkntMZsmU3ewUXUl0-XgH'
 
 # 施設・サービスに関する検索準備
 # FAQリストを読み込む
@@ -70,8 +74,8 @@ def reply_message_2(user_input_2):
         df2 = df1
 
     # 保存したトークナイザーとモデルの読み込み
-    tokenizer2 = AutoTokenizer.from_pretrained("https://drive.google.com/uc?id=1a2VIjUpt6sWIkntMZsmU3ewUXUl0-XgH")
-    model2 = AutoModelForSequenceClassification.from_pretrained("https://drive.google.com/uc?id=1a2VIjUpt6sWIkntMZsmU3ewUXUl0-XgH")
+    tokenizer2 = AutoTokenizer.from_pretrained(folder_path)
+    model2 = AutoModelForSequenceClassification.from_pretrained(folder_path)
 
     # 質問をトークン化してエンコーディング
     encoded_input_2 = tokenizer2(user_input_2, padding=True, truncation=True, return_tensors="pt")
