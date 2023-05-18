@@ -77,7 +77,7 @@ def reply_message_2(user_input_2):
         df2 = df1
 
     # 保存したトークナイザーとモデルの読み込み
-    tokenizer2 = AutoTokenizer.from_pretrained("./trained_model")
+    tokenizer2 = AutoTokenizer.from_pretrained("trained_model")
     model2 = AutoModelForSequenceClassification.from_pretrained("trained_model")
 
     # 質問をトークン化してエンコーディング
