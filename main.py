@@ -75,8 +75,8 @@ def reply_message_2(user_input_2):
     else:
         df2 = df1
 
-    tokenizer2 = AutoTokenizer.from_pretrained("./trained_model")
-    model2 = AutoModelForSequenceClassification.from_pretrained("./trained_model")
+    tokenizer2 = AutoTokenizer.from_pretrained("trained_model")
+    model2 = AutoModelForSequenceClassification.from_pretrained("trained_model")
 
     # 質問をトークン化してエンコーディング
     encoded_input_2 = tokenizer2(user_input_2, padding=True, truncation=True, return_tensors="pt")
