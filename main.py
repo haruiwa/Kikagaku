@@ -70,8 +70,8 @@ def reply_message_2(user_input_2):
         df2 = df1
 
     # 保存したトークナイザーとモデルの読み込み
-    tokenizer2 = AutoTokenizer.from_pretrained("https://drive.google.com/drive/folders/1a2VIjUpt6sWIkntMZsmU3ewUXUl0-XgH?usp=sharing")
-    model2 = AutoModelForSequenceClassification.from_pretrained("https://drive.google.com/drive/folders/1a2VIjUpt6sWIkntMZsmU3ewUXUl0-XgH?usp=sharing")
+    tokenizer2 = AutoTokenizer.from_pretrained("https://drive.google.com/uc?id=1a2VIjUpt6sWIkntMZsmU3ewUXUl0-XgH")
+    model2 = AutoModelForSequenceClassification.from_pretrained("https://drive.google.com/uc?id=1a2VIjUpt6sWIkntMZsmU3ewUXUl0-XgH")
 
     # 質問をトークン化してエンコーディング
     encoded_input_2 = tokenizer2(user_input_2, padding=True, truncation=True, return_tensors="pt")
