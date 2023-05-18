@@ -7,7 +7,6 @@ import transformers
 from transformers import AutoTokenizer, AutoModelForMaskedLM, AutoModelForSequenceClassification
 import re
 import gdown
-import os
 
 # モデルファイルをダウンロード
 file_id = "1a2VIjUpt6sWIkntMZsmU3ewUXUl0-XgH"
@@ -76,16 +75,8 @@ def reply_message_2(user_input_2):
     else:
         df2 = df1
 
-    # モデルファイルをダウンロード
-    file_path = "trained_model"
-    file_exists = os.path.exists(file_path)
-
-    if file_exists:
-        tokenizer2 = AutoTokenizer.from_pretrained("trained_model")
-        model2 = AutoModelForSequenceClassification.from_pretrained("trained_model")
-    else:
-        tokenizer2 = AutoTokenizer.from_pretrained("ken11/albert-base-japanese-v1")
-        model2 = AutoModelForSequenceClassification.from_pretrained("ken11/albert-base-japanese-v1")
+    tokenizer2 = AutoTokenizer.from_pretrained(output)
+    model2 = AutoModelForSequenceClassification.from_pretrained(output)
 
     # 質問をトークン化してエンコーディング
     encoded_input_2 = tokenizer2(user_input_2, padding=True, truncation=True, return_tensors="pt")
@@ -108,6 +99,7 @@ def reply_message_2(user_input_2):
     filtered_df_selected = filtered_df[selected_columns]
 
     return filtered_df_selected
+
 
 # 施設・サービスについての検索画面
 def page_service():
@@ -133,9 +125,11 @@ def page_item():
 st.sidebar.header('接客支援アプリ')
 purpose = st.sidebar.selectbox('検索項目を選択してください', ('施設・サービスについての確認', '商品検索'))
 
-# 検索項目ごとに表示する画面を変更
 if purpose == '施設・サービスについての確認':
     page_service()
-elif purpose == '商品検索':
+
+if purpose == '商品検索':
     page_item()
 
+else:
+    pass
