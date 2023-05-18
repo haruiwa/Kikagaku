@@ -14,13 +14,6 @@ file_id = "1a2VIjUpt6sWIkntMZsmU3ewUXUl0-XgH"
 url = f"https://drive.google.com/uc?id={file_id}"
 output = "trained_model"
 gdown.download(url, output, quiet=False)
-
-# ファイルの存在を確認
-file_exists = os.path.exists(output)
-if file_exists:
-    print("ファイルが存在します")
-else:
-    print("ファイルが存在しません")
     
 # 施設・サービスに関する検索準備
 # FAQリストを読み込む
@@ -83,8 +76,15 @@ def reply_message_2(user_input_2):
     else:
         df2 = df1
 
-    tokenizer2 = AutoTokenizer.from_pretrained(output)
-    model2 = AutoModelForSequenceClassification.from_pretrained(output)
+    # モデルファイルをダウンロード
+    model_file_id = "1a2VIjUpt6sWIkntMZsmU3ewUXUl0-XgH"
+    model_url = f"https://drive.google.com/uc?id={model_file_id}"
+    model_output = "trained_model"
+    gdown.download(model_url, model_output, quiet=False)
+    
+    # ALBERTモデルとTokenizerを事前に読み込む
+    tokenizer2 = AutoTokenizer.from_pretrained(model_output)
+    model2 = AutoModelForSequenceClassification.from_pretrained(model_output)
 
     # 質問をトークン化してエンコーディング
     encoded_input_2 = tokenizer2(user_input_2, padding=True, truncation=True, return_tensors="pt")
@@ -107,6 +107,26 @@ def reply_message_2(user_input_2):
     filtered_df_selected = filtered_df[selected_columns]
 
     return filtered_df_selected
+
+# 施設・サービスについての検索画面
+def page_service():
+    st.title('施設・サービスについての確認')
+    
+    user_input = st.text_input('質問を入力してください','')
+
+    reply_text = reply_message(user_input)
+    if st.button(label='確認'):
+        st.write(reply_text)
+
+# 商品検索についての検索画面
+def page_item():
+    st.title('商品検索')
+
+    user_input_2= st.text_input('検索条件を入力してください','')
+    
+    reply_text_2 = reply_message_2(user_input_2)
+    if st.button(label='検索'):
+        st.write(reply_text_2)selected
 
 
 # 施設・サービスについての検索画面
