@@ -1,3 +1,4 @@
+# 必要なライブラリのインポート
 import streamlit as st
 import numpy as np
 import pandas as pd
@@ -7,6 +8,12 @@ import transformers
 from transformers import AutoTokenizer, AutoModelForMaskedLM, AutoModelForSequenceClassification
 import re
 import gdown
+
+# Google Driveの共有リンクからファイルIDを取得
+file_id = "https://drive.google.com/uc?id=1a2VIjUpt6sWIkntMZsmU3ewUXUl0-XgH"
+
+# モデルファイルをダウンロード
+gdown.download(f"https://drive.google.com/uc?id={file_id}", "trained_model")
 
 # 施設・サービスに関する検索準備
 # FAQリストを読み込む
@@ -68,12 +75,6 @@ def reply_message_2(user_input_2):
                 df2 = df2[df2['入数'] >= number]
     else:
         df2 = df1
-        
-        
-    # モデルのダウンロード
-    model_url = "https://drive.google.com/uc?id=1a2VIjUpt6sWIkntMZsmU3ewUXUl0-XgH"
-    model_output = "trained_model"
-    gdown.download(model_url, model_output, quiet=False)
 
     # 保存したトークナイザーとモデルの読み込み
     tokenizer2 = AutoTokenizer.from_pretrained("trained_model")
@@ -100,6 +101,8 @@ def reply_message_2(user_input_2):
     filtered_df_selected = filtered_df[selected_columns]
 
     return filtered_df_selected
+
+
 # 施設・サービスについての検索画面
 def page_service():
     st.title('施設・サービスについての確認')
