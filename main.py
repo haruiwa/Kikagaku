@@ -128,27 +128,6 @@ def page_item():
     if st.button(label='検索'):
         st.write(reply_text_2)selected
 
-
-# 施設・サービスについての検索画面
-def page_service():
-    st.title('施設・サービスについての確認')
-    
-    user_input = st.text_input('質問を入力してください','')
-
-    reply_text = reply_message(user_input)
-    if st.button(label='確認'):
-        st.write(reply_text)
-
-# 商品検索についての検索画面
-def page_item():
-    st.title('商品検索')
-
-    user_input_2= st.text_input('検索条件を入力してください','')
-    
-    reply_text_2 = reply_message_2(user_input_2)
-    if st.button(label='検索'):
-        st.write(reply_text_2)
-
 # サイドバーの設定
 st.sidebar.header('接客支援アプリ')
 purpose = st.sidebar.selectbox('検索項目を選択してください', ('施設・サービスについての確認', '商品検索'))
